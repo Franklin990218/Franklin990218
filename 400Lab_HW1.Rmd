@@ -1,0 +1,134 @@
+---
+title: "400HW1"
+author: "Yihan Zhou"
+date: "10/13/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### problem 1a
+```{r}
+data <- read.delim("~/Desktop/webtraffic.txt")
+col_total <- colSums(data)
+Traffic <- matrix(col_total, nrow = 9, ncol = 9, byrow = TRUE)
+Traffic[9,1] = 1000
+Traffic
+```
+### problem 1b
+
+
+![Directed Graph](HW.jpg)
+
+
+
+The Markov Chain is irreducible because all states communicate with each other.
+The Markov Chain is ergodic beacuse it is recurrent and aperiodic.
+
+### problem 1c
+```{r}
+row_total <- rowSums(Traffic)
+P = Traffic / row_total
+P
+```
+### problem 1d
+```{r}
+a <- c(1, rep(0,8))
+prob5 = a %*% P %*% P %*% P %*%P %*% P
+prob5[5]
+```
+The probability of a vistor being on Page 5 after 5 clicks is 0.1315178
+
+### problem 1e
+```{r}
+Q <- t(P) - diag(9)
+Q[9, ] <- rep(1,9)
+rhs <- c(rep(0,8),1)
+Pi <- solve (Q, rhs)
+Pi
+```
+```{r}
+B <- P[1:8, 1:8]
+Q <- diag(8) - B
+rhs <- c(0.1,2,3,5,5,3,3,2)
+m <- solve(Q,rhs)
+m[1]
+```
+The average time a vistor spends on the website is 14.563
+
+### Problem 2a
+$$
+n \geq \frac {\frac{1}{\lambda^2}} {{{(10^{-3}})^2}*0.01}
+$$
+$$
+n \geq\frac{10^7}{\lambda^2}
+$$
+
+### Problem 2b
+```{r}
+set.seed(400)
+n1 <- 10000000/ (1^2)
+n2 <- 10000000/ (2^2)
+n3 <- 10000000/ (4^2)
+x1 <- runif(n1,0,1)
+x2 <- runif(n2,0,1)
+x3 <- runif(n3,0,1)
+y1 <- -log(x1)/1
+y2 <- -log(x2)/2
+y3 <- -log(x3)/4
+i1 <- sum(sin(y1)) / n1
+i2 <- sum(sin(y2)/2) / n2
+i3 <- sum(sin(y3)/4) / n3
+i1
+i2
+i3
+
+```
+
+### probelm 3a
+Metropolis-Hastings
+
+### 3b
+```{r}
+q <- function(x, lambda){
+  return(lambda * exp(-lambda * x))
+}
+
+f <- function(x, k=2, theta = 2){
+  return(x^(k-1)* exp(-x/theta))
+}
+
+x_list  = c(1, rep(0,14999))
+
+for(t in 0:14999){
+  if (t == 0){
+    x = 1 
+  }else {
+    x = -log(runif(1,0,1)) / x_list[t+1]
+  }
+  a = f(x) * q(x_list[t+1], x) / (f(x_list[t+1]) * q(x,x_list[t+1]))
+  u = runif(1,0,1)   
+  if (u <= a){
+    x_list[t+2] = x
+  }else
+    x_list[t+2] = x_list[t+1]
+}
+
+hist(x_list[seq(0,15000,100)], freq = FALSE, breaks = 30, main = "Distribution of sampling", xlab = "Sample Value", col = "RED")
+
+  
+```
+```{r}
+sample <- rgamma(n=100, shape=2, rate=2)
+hist(sample, breaks = 20, main = "Gamma Distribution", xlab = "Value")
+```
+
+```{r}
+acf(x_list[seq(5000,15000,100)])
+```
+
+The sample generated in Problem 3b is random due to the acf, and the shape of the distribution is matched Gamma distribution 
+
+
