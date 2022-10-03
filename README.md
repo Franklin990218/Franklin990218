@@ -3,6 +3,8 @@
 ### About me:
 I am a Master student in the Master of Science in Analytics Program in Northwestern University. I am now working in the Insurance Analytics Team in TransUnion, where I mainly devote to extending and optimizing the existing GLM and XGBoost frameworks for property and auto insurance data. I am interested in both Data Science and Product Analyst field.
 
+- The link to my most recent project: https://github.com/MSIA/2022-msia423-yihanzhou
+
 ### Programming Skills:
 Python, R, MySQL, Tableau, Spark, Hadoop, Git, AWS, Linux, Excel, Flask.
 
