@@ -13,7 +13,7 @@ Python, R, MySQL, Tableau, Spark, Hadoop, Git, AWS, Linux, Excel, Flask.
 Data Mining, Machine Learning (Regression, Random Forest, XGboost, SVM, PCA) , Deep Learning (CNN, RNN, GAN, Transfer Learning), Predictive Analytics, Cloud Computing, MapReduce, A/B Testing, Web application.
 
 ### Previous Projects:
-- Text-generation from the Amazon Reviews data using fine-tuned GPT-3, Markov-Chain, LSTM models in Python
+- Text-generation from the Amazon Reviews data using fine-tuned GPT-2, Markov-Chain, LSTM models in Python
 - Web Application of predicting used car price using Python, Docker, YAML, Makerfile, AWS
 - Text Analysis on role of social media plays in political outcomes in Mongolian using sentiment analysis and topic modeling in Python
 - Predicting the customer purchase amounts in response to catalog mailing promotion using logistic regression and linear regression in R
